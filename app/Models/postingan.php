@@ -8,5 +8,4 @@ use Illuminate\Database\Eloquent\Model;
 class postingan extends Model
 {
     use HasFactory;
-
 }
