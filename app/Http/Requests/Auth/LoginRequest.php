@@ -28,8 +28,6 @@ class LoginRequest extends FormRequest
     {
         return [
             'email' => ['required', 'string', 'email'],
-            'dob' => ['required', 'date', 'before_or_equal:'.now()->subYears(12)->format('Y-m-d')],
-            'username' => ['required', 'string', 'min:5', 'max:20', 'unique:users'],
             'password' => ['required', 'string'],
         ];
     }
@@ -43,7 +41,7 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        $credentials = $this->only('email','password', 'dob', 'username');
+        $credentials = $this->only('email','password');
         
 
         if (! Auth::attempt($credentials, $this->boolean('remember'))) {
