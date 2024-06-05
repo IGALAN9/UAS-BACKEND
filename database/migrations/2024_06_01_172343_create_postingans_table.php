@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('postingans', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
+            $table->string('message', 140);
             $table->timestamps();
         });
     }
