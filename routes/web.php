@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\DOBUserController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -19,6 +18,5 @@ Route::middleware('auth')->group(function () {
 });
 
 Route::post('post', \App\Http\Controllers\Post\StorePostController::class)->name('post.store');
-Route::post('/dob-login', [DOBUserController::class, 'store']) -> name('dob.login');
 
 require __DIR__.'/auth.php';
