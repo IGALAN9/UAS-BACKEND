@@ -48,13 +48,13 @@
 
         <!-- Date -->
         <div>
-            <x-input-label for="Date" :value="__('date')" />
+            <x-input-label for="dob" :value="__('Date of Birth')" />
 
             <x-text-input id="dob" class="block mt-1 w-full"
                             type="date"
-                            name="date"/>
+                            name="dob"/>
 
-            <x-input-error :messages="$errors->get('Date')" class="mt-2" />
+            <x-input-error :messages="$errors->get('dob')" class="mt-2" />
         </div>
 
         <div class="flex items-center justify-end mt-4">
