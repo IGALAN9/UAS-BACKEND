@@ -9,6 +9,13 @@
             <x-input-error :messages="$errors->get('name')" class="mt-2" />
         </div>
 
+        <!-- username -->
+        <div>
+            <x-input-label for="username" :value="__('Username')" />
+            <x-text-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username')" required autofocus autocomplete="name" />
+            <x-input-error :messages="$errors->get('username')" class="mt-2" />
+        </div>
+
         <!-- Email Address -->
         <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" />
@@ -37,6 +44,17 @@
                             name="password_confirmation" required autocomplete="new-password" />
 
             <x-input-error :messages="$errors->get('password_confirmation')" class="mt-2" />
+        </div>
+
+        <!-- Date -->
+        <div>
+            <x-input-label for="Date" :value="__('date')" />
+
+            <x-text-input id="dob" class="block mt-1 w-full"
+                            type="date"
+                            name="date"/>
+
+            <x-input-error :messages="$errors->get('Date')" class="mt-2" />
         </div>
 
         <div class="flex items-center justify-end mt-4">
