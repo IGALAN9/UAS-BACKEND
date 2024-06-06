@@ -8,6 +8,13 @@ use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
+    public function index()
+        {
+            return view('dashboard',[
+                'postings' => Posting::latest()->get(),
+                ]);
+        }
+    
     public function store(Request $request)
     {
         posting::create([

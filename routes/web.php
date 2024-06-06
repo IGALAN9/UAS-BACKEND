@@ -12,9 +12,8 @@ Route::get('/', function () {
 Route::get('/register', [RegisteredUserController::class, 'create'])->name('register');
 Route::post('/register', [RegisteredUserController::class, 'store']);
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+Route::get('/dashboard', [PostController::class, 'index'])
+    ->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::post('/posts',[PostController::class,'store'])
     ->middleware(['auth', 'verified'])
