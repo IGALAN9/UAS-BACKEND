@@ -1,6 +1,12 @@
 .env
 config
 config/database.php
-storage
+config/database.php
 .env
-storage/logs/laravel.log
+.env
+package-lock.json
+package.json
+.env
+config/database.php
+storage
+node_modules
