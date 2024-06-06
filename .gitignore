@@ -1,5 +1,6 @@
 .env
 config
 config/database.php
-config/database.php
+storage
 .env
+storage/logs/laravel.log
