@@ -2,4 +2,4 @@
 config
 config/database.php
 config/database.php
-.env
+storage
