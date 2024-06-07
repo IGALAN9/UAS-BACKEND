@@ -23,11 +23,12 @@
                     
                    <div class="flex flex-col space-y">
                     @foreach ($postings as $posting)
-                        <div class="card-bordered bg-yellow-100">
+                        <div class="card-bordered bg-yellow-100"> 
                             <div class="card-body">
                             <h2>{{$posting ->user->name}}</h2>
                                 <p>{{ $posting ->content}}</p>
                             </div>
+                            <a href="{{route('posts.show',$posting)}}" class="link link-secondary">Komentar</a>
                         </div>
                     @endforeach
                     </div>

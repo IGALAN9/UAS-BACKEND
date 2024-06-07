@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-            $table->foreignId('postingans_id')->constrained()->cascadeOnUpdate()->cascadeOnDelete();
-            $table->string('message');
+            $table->foreignId('postings_id')->constrained();
+            $table->foreignId('users_id')->constrained();
+            $table->string('Comment');
             $table->timestamps();
         });
     }
