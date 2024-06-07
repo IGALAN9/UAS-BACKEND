@@ -15,13 +15,6 @@ class PostController extends Controller
                 'postings' => Posting::latest()->get(),
                 ]);
         }
-
-    public function show($postings)
-    {
-        return view('posting.show',[
-            'posting' => Posting::find($postings),
-        ]);
-    }
     
     public function store(Request $request)
     {
