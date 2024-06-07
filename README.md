@@ -1,3 +1,40 @@
+📋 Timeline kerja
+
+✔️ Push laravel -> Done (Galang)
+
+✔️ Register -> Done (Joanne)
+
+✔️ Login -> Done (Eirys)
+
+✔️ Post Text -> Done (Shirley)
+
+✔️ Timeline - > Done (Adriano)
+
+------------(50%)--------------
+
+❌ Like and Comment -> (Galang)
+
+❌ Edit and Delete -> (Shirley)
+
+❌ Follow ->  (Joanne)
+
+------------(75%)--------------
+
+❌ Bookmark -> (Eriys)
+
+❌ Post foto -> (Unassign)
+
+------------(100%)--------------
+
+------------(Optinal things)--------------
+
+❌ Following tab -> (unassign)
+
+❌ Livechat -> (unassign)
+
+Kheinichi -> frontend (will be done after we hit the 100% mark)
+
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
