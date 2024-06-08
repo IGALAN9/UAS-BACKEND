@@ -3,9 +3,7 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                @if(session('success'))
-                <div class="alert alert-success ">{{ session('success')}}</div>
-                @endif
+
                 <div class="p-6 text-gray-900">
                     <!-- form -->
                    <form action="/posts" class="form-control" method="post">
@@ -28,7 +26,14 @@
                             <h2>{{$posting ->user->name}}</h2>
                                 <p>{{ $posting ->content}}</p>
                             </div>
+                            <div class="card-actions p-2">
+                                <button class="btn btn-sm btn-secondary">Like</button>
+                                    <a href="{{ route('postings.show',$posting) }}" class="btn btn-sm btn-secondary">Komentar</a>
+                                </div>
+                                </div>
                         </div>
+
+
                     @endforeach
                     </div>
                  </div>
