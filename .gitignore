@@ -3,3 +3,10 @@ config
 config/database.php
 config/database.php
 .env
+.env
+package-lock.json
+package.json
+.env
+config/database.php
+storage
+node_modules

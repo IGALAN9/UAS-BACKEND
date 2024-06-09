@@ -1,24 +1,49 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Timeline') }}
-        </h2>
-    </x-slot>
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+
                 <div class="p-6 text-gray-900">
-                    <form action="{{ route('post.store') }}" method="post">
+                    <!-- form -->
+                   <form action="/posts" class="form-control" method="post">
                         @csrf
-                        {{ __("Selamat datang di medsos kelompok 2 back end ayeea ayyeeaaa") }}
-                        <textarea id = "message" class="w-full rounded textarea textarea-bordered" rows="3"
-                        placeholder="Post something..."></textarea>
-                        <Input type="submit" value="post, ini kayaknya ada yang salah" class="button">
-                        <input type="hidden" name="_token" value="{{ csrf_token() }}" />
-                    </form>
-                </div>
+                        <textarea class="@error('content')
+                        textarea-error
+                        @enderror textarea textarea-bordered mb-2 bg-white"  cols="30" id="" 
+                        name="content" placeholder="Tuliskan Sesuatu..."
+                            rows="3"></textarea>
+                        @error('content')
+                            <span class="text-error">{{ $message }}</span>
+                        @enderror
+                            <input type="submit" value="Post" class="btn btn-secondary">
+                   </form>
+                    
+                   <div class="flex flex-col space-y-4 mt-4">
+                    @foreach ($postings as $posting)
+                        <div class="card-bordered bg-yellow-100">
+                            <div class="card-body">
+                                <h2>{{$posting ->user->name}}</h2>
+                                <p>{{ $posting ->content}}</p>
+                                </div>
+                                <div class="card-actions p-2">
+                                    <button class="btn btn-sm btn-secondary">Like</button>
+                                    <a href="{{ route('postings.show',$posting) }}" class="btn btn-sm btn-secondary">Komentar</a>
+                                    <form action="{{ route('bookmarks.store') }}" method="POST" class="inline">
+                                        @csrf
+                                        <input type="hidden" name="posting_id" value = "{{ $posting->id }}">
+                                        <button type="submit" class="btn btn-sm btn secondary">Bookmark</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                    </div>
+                 </div>
             </div>
         </div>
+    </div>
+    <div style="position: fixed; bottom: 20px; right: 20px;">
+        <a href="{{ route('bookmarks.index')}}" class="btn btn-primary">Lihat Bookmark Anda</a>
     </div>
 </x-app-layout>
