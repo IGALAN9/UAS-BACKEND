@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,14 @@ Route::get('/dashboard', [PostController::class, 'index'])
 Route::post('/posts',[PostController::class,'store'])
     ->middleware(['auth', 'verified'])
     ->name('posts.store');
+
+Route::resource('postings', PostController::class)
+->except(['create'])
+->middleware(['auth', 'verified']);
+
+Route::post('postings/{posting}/comments', [CommentController::class, 'store'])
+->middleware(['auth', 'verified'])
+->name('comments.store');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
