@@ -37,4 +37,41 @@ class PostController extends Controller
 
         return to_route('dashboard');
     }
+
+    public function edit($id){
+        return view('postings.edit',[
+            'posting' => Posting::find($id),
+        ]);
+    }
+
+    public function update(Request $request, $id)
+    {
+        $this->validate($request,[
+            'content' => ['required']
+        ]);
+
+        $posting = Posting::find($id);
+        
+        $posting->update([
+            'user_id'=> auth()->id(),
+            'content'=> $request->content,        
+        ]);
+
+        session()->flash('success','Berhasil memperbarui Post');
+
+        return to_route('dashboard');
+    }
+
+    public function destroy($id){
+        $posting = Posting::find($id);
+
+        if ($posting){
+            $posting->comments()->delete();
+            $posting->delete();
+            session()->flash('success','Berhasil menghapus Post');
+        } else{
+            session()->flash('success','Berhasil menghapus Post');
+        }
+        return to_route('dashboard');
+    }
 }

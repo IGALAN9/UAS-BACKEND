@@ -2,13 +2,23 @@
 
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+            <!-- @if (session('success'))
+                <div> class="alert alert-success mb-2">{{session('success')}}</div>
+            @endif
+
+            @if (session('danger'))
+                <div> class="alert alert-error mb-2">{{session('danger')}}</div>
+            @endif -->
+
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
 
                 <div class="p-6 text-gray-900">
                     <!-- form -->
-                   <form action="/posts" class="form-control" method="post">
+                   <form action="/posts" class="form-control" 
+                   method="post">
                         @csrf
-                        <textarea class="@error('content')
+                        <textarea 
+                            class="@error('content')
                         textarea-error
                         @enderror textarea textarea-bordered mb-2 bg-white"  cols="30" id="" 
                         name="content" placeholder="Tuliskan Sesuatu..."
@@ -25,6 +35,14 @@
                             <div class="card-body">
                             <h2>{{$posting ->user->name}}</h2>
                                 <p>{{ $posting ->content}}</p>
+                            </div>
+                            <div class="card-actions p-2">
+                               <a href="{{route('posts.edit', $posting->id)}}" class="btn btn-warning btn-sm">Edit</a> 
+                               <form action="{{route('posts.destroy', $posting->id)}}" method="post">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="submit" class="btn.btn-sm btn-error" value="Delete">
+                            </form>
                             </div>
                             <div class="card-actions p-2">
                                 <button class="btn btn-sm btn-secondary">Like</button>
