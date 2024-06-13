@@ -12,6 +12,7 @@ use Illuminate\View\View;
 
 class AuthenticatedSessionController extends Controller
 {
+
     /**
      * Display the login view.
      */
@@ -21,14 +22,13 @@ class AuthenticatedSessionController extends Controller
     }
 
     /**
-     * Handle an incoming authentication request.
+     * Handle an incoming authentication request
      */
     public function store(LoginRequest $request): RedirectResponse
     {
+        //Middleware throttle akan menangani pembatasan login, jadi tidak perlu kode pembatasan disini
         $request->authenticate();
-
-        $request->session()->regenerate();
-
+        $request->session()->regenerated();
         return redirect()->intended(route('dashboard', absolute: false));
     }
 

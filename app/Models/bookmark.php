@@ -5,7 +5,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class bookmark extends Model
+class Bookmark extends Model
 {
     use HasFactory;
+    protected $guarded = [];
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function posting()
+    {
+        return $this->belongsTo(Posting::class);
+    }
 }
