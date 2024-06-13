@@ -4,33 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Halaman Utama</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 
 <style>
     body {
-        font-family: Arial, sans-serif;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         margin: 0;
         padding: 0;
-        background-color: #f9f9f9;
+        background-color: #f0f2f5;
         display: flex;
         justify-content: center;
+        align-items: center;
         height: 100vh;
     }
 
-    /**main page */
     .mainPage {
-        background-color: #ECECEC;
+        background-color: #ffffff;
         padding: 20px;
-        margin-top: 8.5vh;
-        margin-left: 17vw;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        width: 80vw;
-        height: 85.5vh;
-        position: absolute;
-        border: 1px solid #ccc;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 90vw;
+        height: 90vh;
+        border-radius: 10px;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
     }
-
-    /**side navigation */
+    
+    /**Menu bar */
     .sidenav {
         height: 100%;
         width: 0;
@@ -38,23 +39,25 @@
         z-index: 1;
         top: 0;
         left: 0;
-        background-color: #ECECEC;
+        background-color: #34495e;
         overflow-x: hidden;
         transition: 0.5s;
         padding-top: 60px;
     }
+
     .sidenav a {
         padding: 8px 32px;
         text-decoration: none;
-        font-size: 25px;
-        color: #818181;
+        font-size: 20px;
+        color: #ecf0f1;
         display: block;
         transition: 0.3s;
     }
+
     .sidenav a:hover {
-        color: #111;
-        background-color: #ddd;
+        color: #f39c12;
     }
+
     .sidenav .closebtn {
         position: absolute;
         top: 0;
@@ -62,220 +65,240 @@
         font-size: 36px;
         margin-left: 50px;
     }
+
     #menuBar {
-        transition: margin-left .5s;
-        padding: 5px;
-        margin-right: 94vw;
-        margin-top: 1vh;
-        position: absolute;
-    }
-    @media screen and (max-height: 450px) {
-        .sidenav {padding-top: 15px;}
-        .sidenav a {font-size: 18px;}
+        position: fixed;
+        top: 30px;
+        left: 77px;
+        font-size: 25px;
+        cursor: pointer;
     }
 
-    /**Follow n fyp */
+    /**following fyp */    
     .tab {
-        overflow: auto;
-        border: 1px solid #ccc;
-        background-color: #f1f1f1;
+        display: flex;
+        justify-content: center;
+        border-bottom: 1px solid #ccc;
+        background-color: #ecf0f1;
+        padding: 10px 0;
     }
+
     .tab button {
         background-color: inherit;
-        float: middle;
         border: none;
         outline: none;
         cursor: pointer;
         padding: 14px 16px;
-        margin-left: 22vw;
         transition: 0.3s;
         font-size: 17px;
+        color: #34495e;
+        margin: 0 10px;
     }
+
     .tab button:hover {
         background-color: #ddd;
-        text-decoration: underline;
+        border-bottom: 2px solid #2980b9;
     }
+
     .tab button.active {
-        text-decoration: underline;
+        border-bottom: 2px solid #2980b9;
+        color: #2980b9;
     }
+
     .tabcontent {
         display: none;
-        padding: 6px 12px;
+        padding: 20px;
         border: 1px solid #ccc;
         border-top: none;
         background-color: white;
         overflow-y: auto;
-        max-height: 78vh;
+        flex-grow: 1;
     }
 
-    /**Search */
-    .topnav .search-container {
-        float: right;
-        margin-right: 48.5vw;
+    /**search */
+    .topnav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding: 0 20px;
+        margin-left: 25vw;
     }
+
+    .topnav .search-container {
+        display: flex;
+        align-items: center;
+    }
+
     .topnav input[type=text] {
         padding: 6px;
-        margin-top: 8px;
         font-size: 17px;
         border: 1px solid #ccc;
-        border-radius: 4px; 
+        border-radius: 4px;
+        margin-right: 10px;
     }
 
     .topnav .search-container button {
-        float: right;
         padding: 6px 10px;
-        margin-top: 8px;
-        margin-right: 16px;
-        background: #ddd;
+        background: #2980b9;
         font-size: 17px;
-        border: 1px solid #ccc;
-        border-radius: 4px; 
+        border: none;
+        border-radius: 4px;
         cursor: pointer;
+        color: white;
     }
 
     .topnav .search-container button:hover {
-        background: #ccc;
+        background: #3498db;
     }
 
     @media screen and (max-width: 600px) {
         .topnav .search-container {
-            float: none;
-        }
-        .topnav a, .topnav input[type=text], .topnav .search-container button {
-            float: none;
-            display: block;
-            text-align: left;
             width: 100%;
+            justify-content: center;
+            margin-right: 0;
+        }
+
+        .topnav input[type=text] {
             margin: 0;
             padding: 14px;
+            width: 70%;
         }
-        .topnav input[type=text] {
-            border: 1px solid #ccc;  
+
+        .topnav .search-container button {
+            margin: 0;
+            padding: 14px;
+            width: 30%;
         }
+    }
+
+    /**post card */
+    .post-form textarea {
+        width: 100%;
+        border-radius: 5px;
+        padding: 10px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        resize: none;
+    }
+
+    .post-form input[type=submit] {
+        background-color: #2980b9;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .post-form input[type=submit]:hover {
+        background-color: #3498db;
+    }
+
+    .card {
+        background-color: #f9f9f9;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .card h2 {
+        margin: 0 0 10px;
+    }
+
+    .card-actions {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 10px;
+    }
+
+    .card-actions .btn {
+        background-color: #2980b9;
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 5px;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .card-actions .btn:hover {
+        background-color: #3498db;
+    }
+
+    .card-actions .btn-secondary {
+        background-color: #7f8c8d;
+    }
+
+    .card-actions .btn-secondary:hover {
+        background-color: #95a5a6;
+    }
+
+    .fixed-button {
+        position: fixed;
+        bottom: 20px;
+        right: 20px;
+    }
+
+    .fixed-button .btn-primary {
+        background-color: #2980b9;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 5px;
+        text-decoration: none;
+    }
+
+    .fixed-button .btn-primary:hover {
+        background-color: #3498db;
+    }
+
+    /**dropdown */
+    .dropdown {
+        position: absolute;
+        top: 37px;
+        right: 78px;
+        display: inline-block;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+        z-index: 1;
+    }
+
+    .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .dropdown-content a:hover {
+        background-color: #ddd;
+    }
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .dropdown .dropbtn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px;
+        font-size: 16px;
+        border-radius: 10px;
+        border: none;
+        cursor: pointer;
     }
 </style>
 
-
 <body>
-    <div class="mainPage">
-        <div class="tab">
-            <button class="tablinks" onclick="changePage(event, 'Following')">Following</button>
-            <button class="tablinks" onclick="changePage(event, 'FYP')">FYP</button>
-        </div>
-        <div id="Following" class="tabcontent">
-            <h3>Following</h3>
-            <p>INI BUAT FOLLOWING</p>
-            <div class="content">
-                <!-- Content for Following Tab -->
-                <form action="/posts" method="post" class="form-control">
-                    <?php echo csrf_field(); ?>
-                    <textarea class="<?php $__errorArgs = ['content'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> textarea-error <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?> textarea textarea-bordered mb-2 bg-white" cols="30" name="content" placeholder="Tuliskan Sesuatu..." rows="3"></textarea>
-                    <?php $__errorArgs = ['content'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                        <span class="text-error"><?php echo e($message); ?></span>
-                    <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                    <input type="submit" value="Post" class="btn btn-secondary">
-                </form>
-                <div class="posts">
-                    <?php $__currentLoopData = $postings; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $posting): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <div class="card-bordered bg-yellow-100">
-                            <div class="card-body">
-                                <h2><?php echo e($posting->user->name); ?></h2>
-                                <p><?php echo e($posting->content); ?></p>
-                            </div>
-                            <div class="card-actions p-2">
-                                <a href="<?php echo e(route('posts.edit', $posting->id)); ?>" class="btn btn-warning btn-sm">Edit</a>
-                                <form action="<?php echo e(route('posts.destroy', $posting->id)); ?>" method="post" style="display:inline;">
-                                    <?php echo csrf_field(); ?>
-                                    <?php echo method_field('DELETE'); ?>
-                                    <input type="submit" class="btn btn-sm btn-error" value="Delete">
-                                </form>
-                            </div>
-                            <div class="card-actions p-2">
-                                <button class="btn btn-sm btn-secondary">Like</button>
-                                <a href="<?php echo e(route('postings.show', $posting)); ?>" class="btn btn-sm btn-secondary">Komentar</a>
-                                <form action="<?php echo e(route('bookmarks.store')); ?>" method="POST" style="display:inline;">
-                                    <?php echo csrf_field(); ?>
-                                    <input type="hidden" name="posting_id" value="<?php echo e($posting->id); ?>">
-                                    <button type="submit" class="btn btn-sm btn-secondary">Bookmark</button>
-                                </form>
-                            </div>
-                        </div>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                </div>
-            </div>
-        </div>
-        <div id="FYP" class="tabcontent">
-            <h3>FYP</h3>
-            <p>INI BUAT FYP</p> 
-            <div class="content">
-                <!-- Content for FYP Tab (same as Following) -->
-                <form action="/posts" method="post" class="form-control">
-                    <?php echo csrf_field(); ?>
-                    <textarea class="<?php $__errorArgs = ['content'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> textarea-error <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?> textarea textarea-bordered mb-2 bg-white" cols="30" name="content" placeholder="Tuliskan Sesuatu..." rows="3"></textarea>
-                    <?php $__errorArgs = ['content'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                        <span class="text-error"><?php echo e($message); ?></span>
-                    <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                    <input type="submit" value="Post" class="btn btn-secondary">
-                </form>
-                <div class="posts">
-                    <?php $__currentLoopData = $postings; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $posting): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <div class="card-bordered bg-yellow-100">
-                            <div class="card-body">
-                                <h2><?php echo e($posting->user->name); ?></h2>
-                                <p><?php echo e($posting->content); ?></p>
-                            </div>
-                            <div class="card-actions p-2">
-                                <a href="<?php echo e(route('posts.edit', $posting->id)); ?>" class="btn btn-warning btn-sm">Edit</a>
-                                <form action="<?php echo e(route('posts.destroy', $posting->id)); ?>" method="post" style="display:inline;">
-                                    <?php echo csrf_field(); ?>
-                                    <?php echo method_field('DELETE'); ?>
-                                    <input type="submit" class="btn btn-sm btn-error" value="Delete">
-                                </form>
-                            </div>
-                            <div class="card-actions p-2">
-                                <button class="btn btn-sm btn-secondary">Like</button>
-                                <a href="<?php echo e(route('postings.show', $posting)); ?>" class="btn btn-sm btn-secondary">Komentar</a>
-                                <form action="<?php echo e(route('bookmarks.store')); ?>" method="POST" style="display:inline;">
-                                    <?php echo csrf_field(); ?>
-                                    <input type="hidden" name="posting_id" value="<?php echo e($posting->id); ?>">
-                                    <button type="submit" class="btn btn-sm btn-secondary">Bookmark</button>
-                                </form>
-                            </div>
-                        </div>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    <!-- Menu bar -->
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <a href="#">About</a>
@@ -284,21 +307,128 @@ unset($__errorArgs, $__bag); ?>
         <a href="#">Contact</a>
     </div>
 
-    <div id="menuBar">
-        <span style="font-size:20px;cursor:pointer" onclick="openNav()">&#9776; menu</span>
-    </div>
-
-    <div class="topnav">
-        <div class="search-container">
-            <form action="/action_page.php">
-            <input type="text" placeholder="Search.." name="search">
-            <button type="submit"><i class="fa fa-search"></i></button>
-            </form>
+    <!-- Main page -->
+    <div class="mainPage">
+        <div id="menuBar">
+            <span onclick="openNav()">&#9776; Menu</span>
         </div>
-    </div>
 
-    <div style="position: fixed; bottom: 20px; right: 20px;">
-        <a href="<?php echo e(route('bookmarks.index')); ?>" class="btn btn-primary">Lihat Bookmark Anda</a>
+        <!-- search -->
+        <div class="topnav">
+            <div class="search-container">
+                <form action="/action_page.php">
+                    <input type="text" placeholder="Search.." name="search">
+                    <button type="submit"><i class="fa fa-search"></i></button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Following fyp -->
+        <div class="tab">
+            <button class="tablinks" onclick="changePage(event, 'Following')">Following</button>
+            <button class="tablinks" onclick="changePage(event, 'FYP')">FYP</button>
+        </div>
+
+        <div id="Following" class="tabcontent">
+            <h3>Following</h3>
+            <p>Ini untuk Following</p>
+            <div class="content">
+                <form action="/posts" method="post" class="post-form">
+                    <?php echo csrf_field(); ?>
+                    <textarea class="<?php $__errorArgs = ['content'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" name="content" rows="3" placeholder="Apa yang kamu pikirkan?"></textarea>
+                    <?php $__errorArgs = ['content'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                    <span class="text-error"><?php echo e($message); ?></span>
+                    <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                    <input type="submit" value="Post">
+                </form>
+                <div class="posts">
+                    <?php $__currentLoopData = $postings; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $posting): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                        <div class="card">
+                            <div class="card-body">
+                                <h2><?php echo e($posting->user->name); ?></h2>
+                                <p><?php echo e($posting->content); ?></p>
+                            </div>
+                            <div class="card-actions">
+                                <a href="<?php echo e(route('posts.edit', $posting->id)); ?>" class="btn btn-warning">Edit</a>
+                                <form action="<?php echo e(route('posts.destroy', $posting->id)); ?>" method="post" style="display:inline;">
+                                    <?php echo csrf_field(); ?>
+                                    <?php echo method_field('DELETE'); ?>
+                                    <input type="submit" class="btn btn-error" value="Delete">
+                                </form>
+                            </div>
+                            <div class="card-actions">
+                                <button class="btn btn-secondary">Like</button>
+                                <a href="<?php echo e(route('postings.show', $posting)); ?>" class="btn btn-secondary">Komentar</a>
+                                <form action="<?php echo e(route('bookmarks.store')); ?>" method="POST" style="display:inline;">
+                                    <?php echo csrf_field(); ?>
+                                    <input type="hidden" name="posting_id" value="<?php echo e($posting->id); ?>">
+                                    <button type="submit" class="btn btn-secondary">Bookmark</button>
+                                </form>
+                            </div>
+                        </div>
+                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                </div>
+            </div>
+        </div>
+
+        <div id="FYP" class="tabcontent">
+            <h3>FYP</h3>
+            <p>Ini untuk FYP</p>
+        </div>
+
+        <div class="fixed-button">
+            <a href="<?php echo e(route('bookmarks.index')); ?>" class="btn btn-primary">Lihat Bookmark Anda</a>
+        </div>
+
+        <!-- Settings Dropdown -->
+        <div class="dropdown">
+            <button class="dropbtn"><?php echo e(Auth::user()->name); ?></button>
+            <div class="dropdown-content">
+                <a href="<?php echo e(route('profile.edit')); ?>"><?php echo e(__('Profile')); ?></a>
+                <!-- Authentication -->
+                <form method="POST" action="<?php echo e(route('logout')); ?>">
+                    <?php echo csrf_field(); ?>
+                    <?php if (isset($component)) { $__componentOriginal68cb1971a2b92c9735f83359058f7108 = $component; } ?>
+<?php if (isset($attributes)) { $__attributesOriginal68cb1971a2b92c9735f83359058f7108 = $attributes; } ?>
+<?php $component = Illuminate\View\AnonymousComponent::resolve(['view' => 'components.dropdown-link','data' => ['href' => route('logout'),'onclick' => 'event.preventDefault();
+                                        this.closest(\'form\').submit();']] + (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag ? $attributes->all() : [])); ?>
+<?php $component->withName('dropdown-link'); ?>
+<?php if ($component->shouldRender()): ?>
+<?php $__env->startComponent($component->resolveView(), $component->data()); ?>
+<?php if (isset($attributes) && $attributes instanceof Illuminate\View\ComponentAttributeBag): ?>
+<?php $attributes = $attributes->except(\Illuminate\View\AnonymousComponent::ignoredParameterNames()); ?>
+<?php endif; ?>
+<?php $component->withAttributes(['href' => \Illuminate\View\Compilers\BladeCompiler::sanitizeComponentAttribute(route('logout')),'onclick' => 'event.preventDefault();
+                                        this.closest(\'form\').submit();']); ?>
+                        <?php echo e(__('Log Out')); ?>
+
+                     <?php echo $__env->renderComponent(); ?>
+<?php endif; ?>
+<?php if (isset($__attributesOriginal68cb1971a2b92c9735f83359058f7108)): ?>
+<?php $attributes = $__attributesOriginal68cb1971a2b92c9735f83359058f7108; ?>
+<?php unset($__attributesOriginal68cb1971a2b92c9735f83359058f7108); ?>
+<?php endif; ?>
+<?php if (isset($__componentOriginal68cb1971a2b92c9735f83359058f7108)): ?>
+<?php $component = $__componentOriginal68cb1971a2b92c9735f83359058f7108; ?>
+<?php unset($__componentOriginal68cb1971a2b92c9735f83359058f7108); ?>
+<?php endif; ?>
+                </form>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -312,7 +442,7 @@ unset($__errorArgs, $__bag); ?>
             document.getElementById("menuBar").style.marginLeft= "0";
         }
 
-        function changePage(evt, follow) {
+        function changePage(evt, pageName) {
             const tabcontent = document.getElementsByClassName("tabcontent");
             for (let i = 0; i < tabcontent.length; i++) {
                 tabcontent[i].style.display = "none";
@@ -321,7 +451,7 @@ unset($__errorArgs, $__bag); ?>
             for (let i = 0; i < tablinks.length; i++) {
                 tablinks[i].className = tablinks[i].className.replace(" active", "");
             }
-            document.getElementById(follow).style.display = "block";
+            document.getElementById(pageName).style.display = "block";
             evt.currentTarget.className += " active";
         }
     </script>
