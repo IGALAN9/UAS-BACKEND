@@ -21,6 +21,18 @@ Route::post('/posts',[PostController::class,'store'])
     ->middleware(['auth', 'verified'])
     ->name('posts.store');
 
+Route::get('/posts/{id}/edit',[PostController::class,'edit'])
+    ->middleware(['auth', 'verified'])
+    ->name('posts.edit');
+
+Route::put('/posts/{id}',[PostController::class,'update'])
+    ->middleware(['auth', 'verified'])
+    ->name('posts.update');
+
+Route::delete('/posts/{id}',[PostController::class,'destroy'])
+    ->middleware(['auth', 'verified'])
+    ->name('posts.destroy');
+
 Route::resource('postings', PostController::class)
 ->except(['create'])
 ->middleware(['auth', 'verified']);
