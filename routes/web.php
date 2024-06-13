@@ -5,6 +5,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\Post_LikeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -40,6 +41,13 @@ Route::resource('postings', PostController::class)
 Route::post('postings/{posting}/comments', [CommentController::class, 'store'])
 ->middleware(['auth', 'verified'])
 ->name('comments.store');
+
+Route::post('posting/{posting}/like',[Post_LikeController::class,'like'])
+->middleware(['auth', 'verified'])
+->name('posts.like');
+Route::post('posting/{posting}/unlike',[Post_LikeController::class,'unlike'])
+->middleware(['auth', 'verified'])
+->name('posts.unlike');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

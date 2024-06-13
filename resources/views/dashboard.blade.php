@@ -45,7 +45,12 @@
                             </form>
                             </div>
                             <div class="card-actions p-2">
-                                <button class="btn btn-sm btn-secondary">Like</button>
+                            </div>
+                                <form action="{{route('posts.like', $posting->id)}}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="fw-light nav-link fs-6"> <span class="fas fa-heart me-1"
+                                        </span> {{$posting->likes()->count()}} </button>
+                                    </form>
                                     <a href="{{ route('postings.show',$posting) }}" class="btn btn-sm btn-secondary">Komentar</a>
                                     <form action="{{ route('bookmarks.store') }}" method="POST" class="inline">
                                         @csrf
