@@ -41,16 +41,26 @@
                                <form action="{{route('posts.destroy', $posting->id)}}" method="post">
                                     @csrf
                                     @method('DELETE')
-                                    <input type="submit" class="btn.btn-sm btn-error" value="Delete">
+                                    <input type="submit" class="btn btn-sm btn-secondary" value="Delete">
                             </form>
                             </div>
                             <div class="card-actions p-2">
                             </div>
-                                <form action="{{route('posts.like', $posting->id)}}" method="POST">
+                            @if(Auth::user()->liked($posting))
+                                <form action="{{route('posts.unlike', $posting->id)}}" method="POST">
                                     @csrf
-                                    <button type="submit" class="fw-light nav-link fs-6"> <span class="fas fa-heart me-1"
+                                    <button type="submit" class="fw-light nav-link fs-6"> <span class="btn btn-sm btn-secondary">&#128420
                                         </span> {{$posting->likes()->count()}} </button>
                                     </form>
+                            @else
+                                <form action="{{route('posts.like', $posting->id)}}" method="POST">
+                                    @csrf
+                                    <button type="submit" class="fw-light nav-link fs-6"> <span class="btn btn-sm btn-secondary">&#129293
+                                        </span> {{$posting->likes()->count()}} </button>
+                                    </form>
+                            @endif
+                                    <br>
+
                                     <a href="{{ route('postings.show',$posting) }}" class="btn btn-sm btn-secondary">Komentar</a>
                                     <form action="{{ route('bookmarks.store') }}" method="POST" class="inline">
                                         @csrf

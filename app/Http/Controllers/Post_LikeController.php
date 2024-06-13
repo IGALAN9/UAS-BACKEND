@@ -18,7 +18,7 @@ class Post_LikeController extends Controller
     public function unlike(Posting $posting){
         $liker = auth()->user();
 
-        $liker->likes()->deattach($posting);
+        $liker->likes()->detach($posting);
 
         return redirect()->route('dashboard')->with('success',"liked successfully!");
     }
