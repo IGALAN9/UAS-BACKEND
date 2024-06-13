@@ -46,6 +46,9 @@
                             </div>
                             <div class="card-actions p-2">
                             </div>
+                            @auth()
+                                
+                            
                             @if(Auth::user()->liked($posting))
                                 <form action="{{route('posts.unlike', $posting->id)}}" method="POST">
                                     @csrf
@@ -59,6 +62,11 @@
                                         </span> {{$posting->likes()->count()}} </button>
                                     </form>
                             @endif
+                            @endauth
+                            @guest
+                            <a href="{{route('auth.login')}}" class="fw-light nav-link fs-6"> <span class="btn btn-sm btn-secondary">&#129293
+                            </span> {{$posting->likes()->count()}} </a>
+                            @endguest
                                     <br>
 
                                     <a href="{{ route('postings.show',$posting) }}" class="btn btn-sm btn-secondary">Komentar</a>
