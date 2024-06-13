@@ -14,13 +14,13 @@
 
                 <div class="p-6 text-gray-900">
                     <!-- form -->
-                   <form action="/posts" class="form-control" 
+                   <form action="/posts" class="form-control"
                    method="post">
                         @csrf
-                        <textarea 
+                        <textarea
                             class="@error('content')
                         textarea-error
-                        @enderror textarea textarea-bordered mb-2 bg-white"  cols="30" id="" 
+                        @enderror textarea textarea-bordered mb-2 bg-white"  cols="30" id=""
                         name="content" placeholder="Tuliskan Sesuatu..."
                             rows="3"></textarea>
                         @error('content')
@@ -28,21 +28,16 @@
                         @enderror
                             <input type="submit" value="Post" class="btn btn-secondary">
                    </form>
-                    
+
                    <div class="flex flex-col space-y-4 mt-4">
                     @foreach ($postings as $posting)
                         <div class="card-bordered bg-yellow-100">
                             <div class="card-body">
                                 <h2>{{$posting ->user->name}}</h2>
                                 <p>{{ $posting ->content}}</p>
-<<<<<<< HEAD
                                 </div>
-                                <div class="card-actions p-2">
-                                    <button class="btn btn-sm btn-secondary">Like</button>
-=======
-                            </div>
                             <div class="card-actions p-2">
-                               <a href="{{route('posts.edit', $posting->id)}}" class="btn btn-warning btn-sm">Edit</a> 
+                               <a href="{{route('posts.edit', $posting->id)}}" class="btn btn-warning btn-sm">Edit</a>
                                <form action="{{route('posts.destroy', $posting->id)}}" method="post">
                                     @csrf
                                     @method('DELETE')
@@ -51,7 +46,6 @@
                             </div>
                             <div class="card-actions p-2">
                                 <button class="btn btn-sm btn-secondary">Like</button>
->>>>>>> cdf96abc7b07e7f8eb6abca3414f7f9bb22f31af
                                     <a href="{{ route('postings.show',$posting) }}" class="btn btn-sm btn-secondary">Komentar</a>
                                     <form action="{{ route('bookmarks.store') }}" method="POST" class="inline">
                                         @csrf
