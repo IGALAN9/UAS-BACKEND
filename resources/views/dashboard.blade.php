@@ -68,19 +68,21 @@
 
     #menuBar {
         position: fixed;
-        top: 30px;
-        left: 77px;
-        font-size: 25px;
+        top: 35px;
+        left: 79px;
+        font-size: 22px;
         cursor: pointer;
+        color: #4a5568;
     }
+
 
     /**following fyp */    
     .tab {
-        display: flex;
-        justify-content: center;
-        border-bottom: 1px solid #ccc;
-        background-color: #ecf0f1;
-        padding: 10px 0;
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #ccc;
+    background-color: #4a5568;
+    padding: 10px 0;
     }
 
     .tab button {
@@ -91,18 +93,18 @@
         padding: 14px 16px;
         transition: 0.3s;
         font-size: 17px;
-        color: #34495e;
+        color: #fff;
         margin: 0 10px;
     }
 
     .tab button:hover {
-        background-color: #ddd;
-        border-bottom: 2px solid #2980b9;
+        border-bottom: 2px solid #63b3ed;
+        color: #63b3ed;
     }
 
     .tab button.active {
-        border-bottom: 2px solid #2980b9;
-        color: #2980b9;
+        border-bottom: 2px solid #fff;
+        color: #fff;
     }
 
     .tabcontent {
@@ -140,7 +142,7 @@
 
     .topnav .search-container button {
         padding: 6px 10px;
-        background: #2980b9;
+        background: #4a5568;
         font-size: 17px;
         border: none;
         border-radius: 4px;
@@ -183,7 +185,7 @@
     }
 
     .post-form input[type=submit] {
-        background-color: #2980b9;
+        background-color: #4a5568;
         color: white;
         border: none;
         padding: 10px 20px;
@@ -258,7 +260,7 @@
     .dropdown {
         position: absolute;
         top: 37px;
-        right: 78px;
+        right: 90px;
         display: inline-block;
     }
 
@@ -301,16 +303,14 @@
     <!-- Menu bar -->
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
-        <a href="#">About</a>
-        <a href="#">Services</a>
-        <a href="#">Clients</a>
-        <a href="#">Contact</a>
+
+        <a href="{{ route('bookmarks.index')}}" class="btn btn-primary">Bookmark Anda</a>
     </div>
 
     <!-- Main page -->
     <div class="mainPage">
         <div id="menuBar">
-            <span onclick="openNav()">&#9776; Menu</span>
+            <span onclick="openNav()"> <button> &#9776 </button> Menu</span>
         </div>
 
         <!-- search -->
@@ -325,22 +325,12 @@
 
         <!-- Following fyp -->
         <div class="tab">
-            <button class="tablinks" onclick="changePage(event, 'Following')">Following</button>
-            <button class="tablinks" onclick="changePage(event, 'FYP')">FYP</button>
+            <button class="tablinks" onclick="changePage(event, 'Following')">POST</button>
+            <button class="tablinks" onclick="changePage(event, 'FYP')">+</button>
         </div>
 
         <div id="Following" class="tabcontent">
-            <h3>Following</h3>
-            <p>Ini untuk Following</p>
             <div class="content">
-                <form action="/posts" method="post" class="post-form">
-                    @csrf
-                    <textarea class="@error('content') is-invalid @enderror" name="content" rows="3" placeholder="Apa yang kamu pikirkan?"></textarea>
-                    @error('content')
-                    <span class="text-error">{{ $message }}</span>
-                    @enderror
-                    <input type="submit" value="Post">
-                </form>
                 <div class="posts">
                     @foreach ($postings as $posting)
                         <div class="card">
@@ -372,12 +362,16 @@
         </div>
 
         <div id="FYP" class="tabcontent">
-            <h3>FYP</h3>
-            <p>Ini untuk FYP</p>
-        </div>
+            <h3>Post</h3>
 
-        <div class="fixed-button">
-            <a href="{{ route('bookmarks.index')}}" class="btn btn-primary">Lihat Bookmark Anda</a>
+            <form action="/posts" method="post" class="post-form">
+                @csrf
+                <textarea class="@error('content') is-invalid @enderror" name="content" rows="3" placeholder="Apa yang kamu pikirkan?"></textarea>
+                @error('content')
+                <span class="text-error">{{ $message }}</span>
+                @enderror
+                <input type="submit" value="Post">
+            </form>
         </div>
 
         <!-- Settings Dropdown -->
