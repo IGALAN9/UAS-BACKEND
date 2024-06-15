@@ -5,6 +5,7 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -60,5 +61,13 @@ Route::delete('bookmarks/{bookmark}', [BookmarkController::class, 'destroy'])
 Route::get('bookmarks', [BookmarkController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('bookmarks.index');
+
+Route::get('/search', [SearchController::class, 'showSearchPage'])
+    ->middleware(['auth', 'verified'])
+    ->name('search.page');
+
+Route::get('/search/results', [SearchController::class, 'search'])
+    ->middleware(['auth', 'verified'])
+    ->name('search.results');
 
 require __DIR__.'/auth.php';
