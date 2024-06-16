@@ -12,21 +12,24 @@
 
 ------------(50%)--------------
 
-❌ Like and Comment -> (Galang)
+✔️  Like and Comment -> (Galang)
 
-❌ Edit and Delete -> (Shirley)
+✔️  Edit and Delete -> (Shirley)
 
 ❌ Follow ->  (Joanne)
 
 ------------(75%)--------------
 
-❌ Bookmark -> (Eriys)
+✔️  Bookmark -> (Eriys)
 
-❌ Post foto -> (Unassign)
+❌ Profile ->  (Joanne)
+
+✔️  Post foto -> (Adriano)
 
 ------------(100%)--------------
 
 ------------(Optinal things)--------------
+✔️ Search user ->  (Joanne)
 
 ❌ Following tab -> (unassign)
 
