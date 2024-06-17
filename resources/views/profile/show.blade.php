@@ -43,6 +43,9 @@
                             <p>{{ $post -> content}}</p>
                             <div class = "text-gray-500 text-sm mt-2">
                                 {{$post -> created_at ->format('d M Y')}}
+
+                                <span class "ml-2">Comments:{{
+                                    $post -> comments()-> count()}} </span>
                             </div>
                             </div>
                             @endforeach

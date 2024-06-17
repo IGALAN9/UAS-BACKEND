@@ -74,4 +74,13 @@ class PostController extends Controller
         }
         return to_route('dashboard');
     }
+
+    public function showComments(Post $post){
+        $comment = $post -> comments()->latest()->get();
+
+        return view('posts.comments', [ 
+            'post' => $post,
+            'comments' => $comments,
+        ]);
+    }
 }

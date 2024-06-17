@@ -89,4 +89,7 @@ Route::post('users/{user}/unfollow', [FollowerController::class, 'unfollow'])
     ->middleware(['auth', 'verified'])
     ->name('users.unfollow');
 
+Route::get('/post/{post}/comments', 'App\Http\Controllers\PostController@showComments')
+    ->middleware(['auth', 'verified'])
+    ->name('posts.comments');
 require __DIR__.'/auth.php';
