@@ -17,20 +17,24 @@
                 $.ajax({
                     url: "{{ route('search.results') }}",
                     type: "GET",
-                    data: {'query': query},
+                    data: { 'query': query },
                     success: function(data) {
-                        console.log(data); // Tambahkan log untuk debug
+                        console.log(data); 
                         $('#result').empty();
-                        if(data.length > 0) {
+                        if (data.length > 0) {
                             $.each(data, function(key, user) {
-                                $('#result').append('<li>' + user.username + '</li>');
+                                var userUrl = '{{ url("/profile") }}/' + user.username;
+                                $('#result').append('<li><a href="' + userUrl + '">' + user.username + '</a></li>');
                             });
-                        } else {
+                        } 
+                        else {
                             $('#result').append('<li>No results found</li>');
                         }
                     },
                     error: function(xhr, status, error) {
-                        console.error(xhr.responseText); // Tampilkan pesan error jika ada
+                        console.error(xhr.responseText); 
+                        $('#result').empty();
+                        $('#result').append('<li>' + xhr.responseJSON.message + '</li>');
                     }
                 });
             });
