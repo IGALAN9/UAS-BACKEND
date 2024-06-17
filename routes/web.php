@@ -5,12 +5,8 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
-<<<<<<< HEAD
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserProfileController;
-=======
-use App\Http\Controllers\Post_LikeController;
->>>>>>> main
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
