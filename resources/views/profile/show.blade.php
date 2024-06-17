@@ -34,6 +34,7 @@
                         @endif
                     @endauth
                     <p class="mt-2">Name: {{ $user->name }}</p>
+                    <p class = "mt-2">Bio: {{$user -> bio}}</p>
                     <p class = "mt-2">Following: {{$user->following()->count()}}</p>
                     <p class = "mt-2">Followers:  {{$user->followers()->count()}}</p>
                     <p class = "mt-2">Posts: {{$user->posting()->count()}}</p>
