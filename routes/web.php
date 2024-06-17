@@ -7,6 +7,7 @@ use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\FollowerController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -79,5 +80,13 @@ Route::get('/search', [SearchController::class, 'showSearchPage'])
 Route::get('/search/results', [SearchController::class, 'search'])
     ->middleware(['auth', 'verified'])
     ->name('search.results');
+
+Route::post('users/{user}/follow', [FollowerController::class, 'follow'])
+    ->middleware(['auth', 'verified'])
+    ->name('users.follow');
+
+Route::post('users/{user}/unfollow', [FollowerController::class, 'unfollow'])
+    ->middleware(['auth', 'verified'])
+    ->name('users.unfollow');
 
 require __DIR__.'/auth.php';
