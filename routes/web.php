@@ -50,4 +50,12 @@ Route::get('bookmarks', [BookmarkController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('bookmarks.index');
 
+Route::middleware(['auth'])->group(function() {
+    Route::get('/messages', [MessageController::class, 'show'])->name('messages.show');
+    Route::get('/messages/search', [MessageController::class, 'search'])->name('messages.search');
+    Route::get('/messages/chat/{userId}', [MessageController::class, 'chat'])->name('messages.chat');
+    Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
+    Route::delete('/messages/{message}', [MessageController::class, 'destroy'])->name('messages.destroy');
+});
+
 require __DIR__.'/auth.php';
