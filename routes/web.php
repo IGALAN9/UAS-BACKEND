@@ -95,4 +95,8 @@ Route::get('/posting/{posting}', [PostController::class, 'show'])
     ->middleware(['auth', 'verified'])
     ->name('posting.show');
 
+Route::get('/followsugest', [FollowerController::class, 'show'])
+    ->middleware(['auth', 'verified'])
+    ->name('follow.show');
+
 require __DIR__.'/auth.php';
