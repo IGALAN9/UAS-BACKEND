@@ -28,7 +28,7 @@
                             });
                         } 
                         else {
-                            $('#result').append('<li>No results found</li>');
+                            $('#result').append('<li>Username not found</li>');
                         }
                     },
                     error: function(xhr, status, error) {
