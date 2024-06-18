@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\Post_LikeController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
@@ -47,6 +48,7 @@ Route::post('postings/{posting}/comments', [CommentController::class, 'store'])
 Route::post('posting/{posting}/like',[Post_LikeController::class,'like'])
 ->middleware(['auth', 'verified'])
 ->name('posts.like');
+
 Route::post('posting/{posting}/unlike',[Post_LikeController::class,'unlike'])
 ->middleware(['auth', 'verified'])
 ->name('posts.unlike');
@@ -89,7 +91,8 @@ Route::post('users/{user}/unfollow', [FollowerController::class, 'unfollow'])
     ->middleware(['auth', 'verified'])
     ->name('users.unfollow');
 
-Route::get('/post/{post}/comments', 'App\Http\Controllers\PostController@showComments')
+Route::get('/posting/{posting}', [PostController::class, 'show'])
     ->middleware(['auth', 'verified'])
-    ->name('posts.comments');
+    ->name('posting.show');
+
 require __DIR__.'/auth.php';

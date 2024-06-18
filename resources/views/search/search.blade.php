@@ -6,8 +6,8 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body>
-    <h1>Search Usernames</h1>
-    <input type="text" id="search" placeholder="Search usernames...">
+    <h1>Search</h1>
+    <input type="text" id="search" placeholder="Search by usernames...">
     <ul id="result"></ul>
 
     <script type="text/javascript">

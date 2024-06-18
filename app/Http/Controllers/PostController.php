@@ -15,13 +15,6 @@ class PostController extends Controller
                 'postings' => Posting::latest()->get(),
                 ]);
         }
-
-    public function show($posting)
-    {
-        return view('postings.show',[
-            'posting' => Posting::find($posting),
-        ]);
-    }
     
     public function store(Request $request)
     {
@@ -75,12 +68,9 @@ class PostController extends Controller
         return to_route('dashboard');
     }
 
-    public function showComments(Post $post){
-        $comment = $post -> comments()->latest()->get();
+    public function show(Posting $posting){
+        $posting -> load('comments.user');
 
-        return view('posts.comments', [ 
-            'post' => $post,
-            'comments' => $comments,
-        ]);
+        return view('postings.show', compact('posting'));
     }
 }

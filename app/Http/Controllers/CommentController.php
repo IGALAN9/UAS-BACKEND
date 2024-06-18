@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\Models\Comment;
+use App\Models\Posting;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -25,17 +26,19 @@ class CommentController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request, $posting)
+    public function store(Request $request, Posting $posting)
     {
-        Comment::create([
-            'posting_id' => $posting,
-            'user_id' => auth()->id(),
-            'message' => $request->message,
+        $request -> validate([
+            'message' => 'required|string',
         ]);
 
-        session()->flash('success','berhasil menambahkan komentar');
+        $comment = new Comment();
+        $comment -> message = $request -> message;
+        $comment -> user_id = auth() -> id();
 
-        return redirect()->back();
+        $posting -> comments() -> save($comment);
+
+        return redirect()->route('postings.show', $posting->id)->with('success','berhasil menambahkan komentar');
     }
 
     /**
