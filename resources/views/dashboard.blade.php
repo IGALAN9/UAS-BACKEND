@@ -1,5 +1,4 @@
 <x-app-layout>
-
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <!-- @if (session('success'))
@@ -11,7 +10,6 @@
             @endif -->
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-
                 <div class="p-6 text-gray-900">
                     <!-- form -->
                    <form action="/posts" class="form-control"
@@ -31,6 +29,13 @@
 
                    <div class="flex flex-col space-y-4 mt-4">
                     @foreach ($postings as $posting)
+                        <figure class="px-10 pt-10">
+                            @if ($posting->photo)
+                                <img src="{{ asset('storage/' . $posting->photo) }}" height="100px" alt="Photo" class="rounded-xl w-1/2" />
+                            @else
+                                <span>No photo</span>
+                            @endif
+                        </figure>
                         <div class="card-bordered bg-yellow-100">
                             <div class="card-body">
                                 <h2>{{$posting ->user->name}}</h2>
@@ -80,7 +85,7 @@
                         </div>
                     @endforeach
                     </div>
-                 </div>
+                </div>
             </div>
         </div>
     </div>
