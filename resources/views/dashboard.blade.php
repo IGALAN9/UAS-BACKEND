@@ -24,6 +24,7 @@
                         @error('content')
                             <span class="text-error">{{ $message }}</span>
                         @enderror
+                        <input type="file" name="photo" class="file-input file-input-bordered file-input-info bg-yellow-100 w-full max-w-xs" />
                             <input type="submit" value="Post" class="btn btn-secondary">
                    </form>
 
