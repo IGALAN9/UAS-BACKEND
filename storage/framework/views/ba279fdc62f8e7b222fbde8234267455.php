@@ -31,9 +31,9 @@
             <!-- Page Content -->
             <main>
                 <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
-                <?php if(session('success')): ?>
-                <div class="alert alert-success "><?php echo e(session('success')); ?></div>
-                <?php endif; ?>
+                    <?php if(session('success')): ?>
+                        <div class="alert alert-success"><?php echo e(session('success')); ?></div>
+                    <?php endif; ?>
                 </div>
                 <?php echo e($slot); ?>
 

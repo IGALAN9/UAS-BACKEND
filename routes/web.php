@@ -2,9 +2,12 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\Post_LikeController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\SearchController;
+use App\Http\Controllers\UserProfileController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -41,11 +44,20 @@ Route::post('postings/{posting}/comments', [CommentController::class, 'store'])
 ->middleware(['auth', 'verified'])
 ->name('comments.store');
 
+Route::post('posting/{posting}/like',[Post_LikeController::class,'like'])
+->middleware(['auth', 'verified'])
+->name('posts.like');
+Route::post('posting/{posting}/unlike',[Post_LikeController::class,'unlike'])
+->middleware(['auth', 'verified'])
+->name('posts.unlike');
+
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+Route::get('/profile/{username}', [ProfileController::class, 'show'])->name('profile.show');
 
 Route::post('post', \App\Http\Controllers\Post\StorePostController::class)->name('post.store');
 
@@ -60,5 +72,13 @@ Route::delete('bookmarks/{bookmark}', [BookmarkController::class, 'destroy'])
 Route::get('bookmarks', [BookmarkController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('bookmarks.index');
+
+Route::get('/search', [SearchController::class, 'showSearchPage'])
+    ->middleware(['auth', 'verified'])
+    ->name('search.page');
+
+Route::get('/search/results', [SearchController::class, 'search'])
+    ->middleware(['auth', 'verified'])
+    ->name('search.results');
 
 require __DIR__.'/auth.php';

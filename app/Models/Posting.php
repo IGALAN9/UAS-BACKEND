@@ -9,6 +9,10 @@ class Posting extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'user_id', 'content', 'photo',
+    ];
+    
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -17,5 +21,9 @@ class Posting extends Model
     public function comments()
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function likes() {
+        return $this->belongsToMany(User::class, 'likes')->withTimestamps();
     }
 }

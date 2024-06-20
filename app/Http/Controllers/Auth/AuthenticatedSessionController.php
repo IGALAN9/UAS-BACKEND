@@ -28,7 +28,7 @@ class AuthenticatedSessionController extends Controller
     {
         //Middleware throttle akan menangani pembatasan login, jadi tidak perlu kode pembatasan disini
         $request->authenticate();
-        $request->session()->regenerated();
+        $request->session()->regenerate();
         return redirect()->intended(route('dashboard', absolute: false));
     }
 

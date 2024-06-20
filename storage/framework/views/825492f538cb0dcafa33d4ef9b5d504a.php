@@ -324,42 +324,100 @@
         </div>
 
         <!-- Following fyp -->
-        <div class="tab">
-            <button class="tablinks" onclick="changePage(event, 'Following')">POST</button>
-            <button class="tablinks" onclick="changePage(event, 'FYP')">+</button>
-        </div>
-
         <div id="Following" class="tabcontent">
             <div class="content">
-                <div class="posts">
-                    <?php $__currentLoopData = $postings; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $posting): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                        <div class="card">
-                            <div class="card-body">
-                                <h2><?php echo e($posting->user->name); ?></h2>
-                                <p><?php echo e($posting->content); ?></p>
-                            </div>
-                            <div class="card-actions">
-                                <a href="<?php echo e(route('posts.edit', $posting->id)); ?>" class="btn btn-warning">Edit</a>
-                                <form action="<?php echo e(route('posts.destroy', $posting->id)); ?>" method="post" style="display:inline;">
-                                    <?php echo csrf_field(); ?>
-                                    <?php echo method_field('DELETE'); ?>
-                                    <input type="submit" class="btn btn-error" value="Delete">
-                                </form>
-                            </div>
-                            <div class="card-actions">
-                                <button class="btn btn-secondary">Like</button>
-                                <a href="<?php echo e(route('postings.show', $posting)); ?>" class="btn btn-secondary">Komentar</a>
-                                <form action="<?php echo e(route('bookmarks.store')); ?>" method="POST" style="display:inline;">
-                                    <?php echo csrf_field(); ?>
-                                    <input type="hidden" name="posting_id" value="<?php echo e($posting->id); ?>">
-                                    <button type="submit" class="btn btn-secondary">Bookmark</button>
-                                </form>
-                            </div>
+                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 text-gray-900">
+                        <!-- form -->
+                        <form action="/posts" class="form-control" method="post" enctype="multipart/form-data">
+                            <?php echo csrf_field(); ?>
+                            <textarea
+                                class="<?php $__errorArgs = ['content'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> textarea-error <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?> textarea textarea-bordered mb-2 bg-white" cols="30"
+                                name="content" placeholder="Tuliskan Sesuatu..." rows="3"></textarea>
+                            <?php $__errorArgs = ['content'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                <span class="text-error"><?php echo e($message); ?></span>
+                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                            <input type="file" name="photo" class="file-input file-input-bordered file-input-info bg-yellow-100 w-full max-w-xs" />
+                            <input type="submit" value="Post" class="btn btn-secondary">
+                        </form>
+
+                        <div class="flex flex-col space-y-4 mt-4 posts">
+                            <?php $__currentLoopData = $postings; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $posting): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                <figure class="px-10 pt-10">
+                                    <?php if($posting->photo): ?>
+                                        <img src="<?php echo e(asset('storage/' . $posting->photo)); ?>" height="100px" alt="Photo" class="rounded-xl w-1/2" />
+                                    <?php else: ?>
+                                        <span>No photo</span>
+                                    <?php endif; ?>
+                                </figure>
+                                <div class="card-bordered bg-yellow-100">
+                                    <div class="card-body">
+                                        <h2><?php echo e($posting->user->name); ?></h2>
+                                        <p><?php echo e($posting->content); ?></p>
+                                    </div>
+                                    <div class="card-actions p-2">
+                                        <a href="<?php echo e(route('posts.edit', $posting->id)); ?>" class="btn btn-warning btn-sm">Edit</a>
+                                        <form action="<?php echo e(route('posts.destroy', $posting->id)); ?>" method="post" style="display:inline;">
+                                            <?php echo csrf_field(); ?>
+                                            <?php echo method_field('DELETE'); ?>
+                                            <input type="submit" class="btn btn-sm btn-secondary" value="Delete">
+                                        </form>
+                                    </div>
+                                    <div class="card-actions p-2">
+                                        <?php if(auth()->guard()->check()): ?>
+                                            <?php if(Auth::user()->liked($posting)): ?>
+                                                <form action="<?php echo e(route('posts.unlike', $posting->id)); ?>" method="POST" style="display:inline;">
+                                                    <?php echo csrf_field(); ?>
+                                                    <button type="submit" class="fw-light nav-link fs-6">
+                                                        <span class="btn btn-sm btn-secondary">&#128420</span> <?php echo e($posting->likes()->count()); ?>
+
+                                                    </button>
+                                                </form>
+                                            <?php else: ?>
+                                                <form action="<?php echo e(route('posts.like', $posting->id)); ?>" method="POST" style="display:inline;">
+                                                    <?php echo csrf_field(); ?>
+                                                    <button type="submit" class="fw-light nav-link fs-6">
+                                                        <span class="btn btn-sm btn-secondary">&#129293</span> <?php echo e($posting->likes()->count()); ?>
+
+                                                    </button>
+                                                </form>
+                                            <?php endif; ?>
+                                        <?php endif; ?>
+                                        <?php if(auth()->guard()->guest()): ?>
+                                            <a href="<?php echo e(route('auth.login')); ?>" class="fw-light nav-link fs-6">
+                                                <span class="btn btn-sm btn-secondary">&#129293</span> <?php echo e($posting->likes()->count()); ?>
+
+                                            </a>
+                                        <?php endif; ?>
+                                        <a href="<?php echo e(route('postings.show', $posting)); ?>" class="btn btn-sm btn-secondary">Komentar</a>
+                                        <form action="<?php echo e(route('bookmarks.store')); ?>" method="POST" class="inline">
+                                            <?php echo csrf_field(); ?>
+                                            <input type="hidden" name="posting_id" value="<?php echo e($posting->id); ?>">
+                                            <button type="submit" class="btn btn-sm btn-secondary">Bookmark</button>
+                                        </form>
+                                    </div>
+                                </div>
+                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                         </div>
-                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                    </div>
                 </div>
             </div>
         </div>
+
 
         <div id="FYP" class="tabcontent">
             <h3>Post</h3>
