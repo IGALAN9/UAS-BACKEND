@@ -9,6 +9,8 @@ class Posting extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['user_id','content','video_url'];
+
     public function user()
     {
         return $this->belongsTo(User::class);

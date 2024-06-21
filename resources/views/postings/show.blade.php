@@ -6,8 +6,13 @@
                 <div class="card-body">
                 <h2>{{$posting ->user->name}}</h2>
                     <p>{{ $posting ->content}}</p>
+                    @if($posting->video_url)
+                    <video controls class="mt-2" style="max-width: 100%; heigth:auto;">
+                        <source src="{{ Storage::url($posting->video_url) }}" type="video/mp4">
+                    </video>
+                    @endif
                 </div>
-                <div class="card-actions p-2">
+                <div class="card-actions p-2"></div>
             </div>
 
             <div class="card bg-base-50 ">
@@ -22,17 +27,17 @@
                 </div>
             </div>
         </div>
-    </div>
 
-    @foreach ($posting->comments as $comment)
-        <div class="mx-auto max-w-7xl sm:px-6 lg:p=8 spacey-4">
-            <div class="card-bordered bg-yellow-100 mb-2">
-                <div class="card-body">
-                <h3>{{$comment ->user->name}}</h3>
-                    <p>{{ $comment ->message}}</p>
+        @foreach ($posting->comments as $comment)
+            <div class="mx-auto max-w-7xl sm:px-6 lg:p=8 spacey-4">
+                <div class="card-bordered bg-yellow-100 mb-2">
+                    <div class="card-body">
+                    <h3>{{$comment ->user->name}}</h3>
+                        <p>{{ $comment ->message}}</p>
+                    </div>
+                    <div class="card-actions p-2"></div>
                 </div>
-                <div class="card-actions p-2">
             </div>
         @endforeach
-
+    </div>
 </x-app-layout>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Posting;
 use Illuminate\Http\Request;
 use Illuminate\Foundation\Validation\ValidatesRequests;
+use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
@@ -26,11 +27,19 @@ class PostController extends Controller
     public function store(Request $request)
     {
         $this->validate($request,[
-            'content' => ['required']
+            'content' => ['required'],
+            'video'=>['nullable','mimes:mp4,mov,avi,flv,mkv','max:20480'],
         ]);
+
+        $video_path = null;
+        if($request->hasFile('video')){
+            $video_path = $request->file('video')->store('videos','public');
+        }
+
         posting::create([
             'user_id'=> auth()->id(),
-            'content'=> $request->content,        
+            'content'=> $request->content,    
+            'video_url'=> $video_path,    
         ]);
 
         session()->flash('success','Berhasil Post');
@@ -66,6 +75,9 @@ class PostController extends Controller
         $posting = Posting::find($id);
 
         if ($posting){
+            if($posting->video_url){
+                Storage::disk('public')->delete($posting->video_url);
+            }
             $posting->comments()->delete();
             $posting->delete();
             session()->flash('success','Berhasil menghapus Post');
