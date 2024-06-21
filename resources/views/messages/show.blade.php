@@ -1,5 +1,5 @@
 <x-app-layout>
-    <div vlass="py-12">
+    <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 bg-white border-b border-gray-200">
@@ -25,7 +25,7 @@
                     @endif
 
                     <div class="mb-4">
-                        <h2 class="text-lg font-semibold mb-2">Percakapan Anda<h/2>
+                        <h2 class="text-lg font-semibold mb-2">Percakapan Anda</h2>
                         <ul>
                             @forelse ($conversations as $userId => $conversation)
                                 @php

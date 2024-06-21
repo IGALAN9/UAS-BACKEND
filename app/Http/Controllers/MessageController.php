@@ -66,8 +66,12 @@ class MessageController extends Controller
             ->with(['sender', 'receiver'])
             ->latest()
             ->get();
+        
+        $conversations = $messages->groupBy(function ($message) {
+            return $message -> sender_id == Auth::id() ? $message->receiver_id : $message->sender_id;
+        });
 
-        return view('messages.show', compact('users', 'messages'));
+        return view('messages.show', compact('users', 'conversations'));
     }
 
     public function chat ($userId)
