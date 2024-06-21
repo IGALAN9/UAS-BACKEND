@@ -10,3 +10,4 @@ package.json
 config/database.php
 storage
 node_modules
+storage/logs/laravel.log
