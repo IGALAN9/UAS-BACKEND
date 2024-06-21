@@ -12,25 +12,29 @@
 
 ------------(50%)--------------
 
-❌ Like and Comment -> (Galang)
+✔️ Like and Comment -> (Galang)
 
-❌ Edit and Delete -> (Shirley)
+✔️ Edit and Delete -> (Shirley)
 
-❌ Follow ->  (Joanne)
+✔️ Search user -> (Joanne)
 
 ------------(75%)--------------
 
-❌ Bookmark -> (Eriys)
+✔️ Bookmark -> (Eriys)
 
-❌ Post foto -> (Unassign)
+❌ Profile -> (Joanne)
+
+✔️ Post foto -> (Adriano)
 
 ------------(100%)--------------
 
-------------(Optinal things)--------------
+------------(Optinal things)-------------- 
 
-❌ Following tab -> (unassign)
+❌ Follow -> (Joanne)
 
-❌ Livechat -> (unassign)
+❌ Following tab -> (kheinichi)
+
+❌ Livechat -> (eriys and joanne)
 
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>

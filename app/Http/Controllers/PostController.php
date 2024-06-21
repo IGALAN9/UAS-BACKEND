@@ -24,18 +24,26 @@ class PostController extends Controller
     }
     
     public function store(Request $request)
-    {
-        $this->validate($request,[
-            'content' => ['required']
-        ]);
-        posting::create([
-            'user_id'=> auth()->id(),
-            'content'=> $request->content,        
-        ]);
+{
+    $this->validate($request, [
+        'content' => ['required'],
+        'photo' => ['image'],
+    ]);
 
-        session()->flash('success','Berhasil Post');
+    $photo = null;
 
-        return to_route('dashboard');
+    if ($request->hasFile('photo')) {
+        $photo = $request->file('photo')->store('photos', 'public');
+    }
+    Posting::create([
+        'user_id' => auth()->id(),
+        'content' => $request->content,
+        'photo' => $photo,
+    ]);
+
+    session()->flash('success', 'Berhasil Post');
+
+    return redirect()->route('dashboard');
     }
 
     public function edit($id){
