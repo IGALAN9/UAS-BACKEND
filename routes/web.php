@@ -76,6 +76,14 @@ Route::get('bookmarks', [BookmarkController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('bookmarks.index');
 
+Route::get('/search', [SearchController::class, 'showSearchPage'])
+    ->middleware(['auth', 'verified'])
+    ->name('search.page');
+
+Route::get('/search/results', [SearchController::class, 'search'])
+    ->middleware(['auth', 'verified'])
+    ->name('search.results');
+
 Route::middleware(['auth'])->group(function() {
     Route::get('/messages', [MessageController::class, 'show'])->name('messages.show');
     Route::get('/messages/search', [MessageController::class, 'search'])->name('messages.search');
