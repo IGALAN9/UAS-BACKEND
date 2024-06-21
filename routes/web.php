@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\BookmarkController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Post_LikeController;
 use Illuminate\Support\Facades\Route;
@@ -68,5 +69,13 @@ Route::delete('bookmarks/{bookmark}', [BookmarkController::class, 'destroy'])
 Route::get('bookmarks', [BookmarkController::class, 'index'])
     ->middleware(['auth', 'verified'])
     ->name('bookmarks.index');
+
+Route::middleware(['auth'])->group(function() {
+    Route::get('/messages', [MessageController::class, 'show'])->name('messages.show');
+    Route::get('/messages/search', [MessageController::class, 'search'])->name('messages.search');
+    Route::get('/messages/chat/{userId}', [MessageController::class, 'chat'])->name('messages.chat');
+    Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
+    Route::delete('/messages/{message}', [MessageController::class, 'destroy'])->name('messages.destroy');
+});
 
 require __DIR__.'/auth.php';
