@@ -84,7 +84,6 @@ Route::middleware(['auth'])->group(function() {
     Route::delete('/messages/{message}', [MessageController::class, 'destroy'])->name('messages.destroy');
 });
 
-following
 Route::post('users/{user}/follow', [FollowerController::class, 'follow'])
     ->middleware(['auth', 'verified'])
     ->name('users.follow');
