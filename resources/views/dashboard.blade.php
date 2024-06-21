@@ -11,6 +11,19 @@
 
             <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
                 <div class="p-6 text-gray-900">
+                    <!-- Search -->
+                    <div class="flex justify-between items-center mb-4">
+                        <a href="{{ route('search.page') }}" class="text-blue-600 hover:underline">
+                            Search 
+                            </a>
+                </div>
+                    <!-- Follow suggestion -->
+                    <div class="flex justify-between items-center mb-4">
+                        <a href="{{ route('follow.show') }}" class="text-blue-600 hover:underline">
+                            Follow Suggestion
+                            </a>
+
+
                     <!-- form -->
                    <form action="/posts" class="form-control"
                    method="post">
