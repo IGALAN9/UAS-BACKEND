@@ -324,95 +324,83 @@
         </div>
 
         <!-- Following fyp -->
-        <div id="Following" class="tabcontent">
-            <div class="content">
-                <div class="bg-white overflow-hidden shadow-sm sm:rounded-lg">
-                    <div class="p-6 text-gray-900">
-                        <!-- form -->
-                        <form action="/posts" class="form-control" method="post" enctype="multipart/form-data">
-                            @csrf
-                            <textarea
-                                class="@error('content') textarea-error @enderror textarea textarea-bordered mb-2 bg-white" cols="30"
-                                name="content" placeholder="Tuliskan Sesuatu..." rows="3"></textarea>
-                            @error('content')
-                                <span class="text-error">{{ $message }}</span>
-                            @enderror
-                            <input type="file" name="photo" class="file-input file-input-bordered file-input-info bg-yellow-100 w-full max-w-xs" />
-                            <input type="submit" value="Post" class="btn btn-secondary">
-                        </form>
-
-                        <div class="flex flex-col space-y-4 mt-4 posts">
-                            @foreach ($postings as $posting)
-                                <figure class="px-10 pt-10">
-                                    @if ($posting->photo)
-                                        <img src="{{ asset('storage/' . $posting->photo) }}" height="100px" alt="Photo" class="rounded-xl w-1/2" />
-                                    @else
-                                        <span>No photo</span>
-                                    @endif
-                                </figure>
-                                <div class="card-bordered bg-yellow-100">
-                                    <div class="card-body">
-                                        <h2>{{ $posting->user->name }}</h2>
-                                        <p>{{ $posting->content }}</p>
-                                    </div>
-                                    <div class="card-actions p-2">
-                                        <a href="{{ route('posts.edit', $posting->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                                        <form action="{{ route('posts.destroy', $posting->id) }}" method="post" style="display:inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <input type="submit" class="btn btn-sm btn-secondary" value="Delete">
-                                        </form>
-                                    </div>
-                                    <div class="card-actions p-2">
-                                        @auth
-                                            @if (Auth::user()->liked($posting))
-                                                <form action="{{ route('posts.unlike', $posting->id) }}" method="POST" style="display:inline;">
-                                                    @csrf
-                                                    <button type="submit" class="fw-light nav-link fs-6">
-                                                        <span class="btn btn-sm btn-secondary">&#128420</span> {{ $posting->likes()->count() }}
-                                                    </button>
-                                                </form>
-                                            @else
-                                                <form action="{{ route('posts.like', $posting->id) }}" method="POST" style="display:inline;">
-                                                    @csrf
-                                                    <button type="submit" class="fw-light nav-link fs-6">
-                                                        <span class="btn btn-sm btn-secondary">&#129293</span> {{ $posting->likes()->count() }}
-                                                    </button>
-                                                </form>
-                                            @endif
-                                        @endauth
-                                        @guest
-                                            <a href="{{ route('auth.login') }}" class="fw-light nav-link fs-6">
-                                                <span class="btn btn-sm btn-secondary">&#129293</span> {{ $posting->likes()->count() }}
-                                            </a>
-                                        @endguest
-                                        <a href="{{ route('postings.show', $posting) }}" class="btn btn-sm btn-secondary">Komentar</a>
-                                        <form action="{{ route('bookmarks.store') }}" method="POST" class="inline">
-                                            @csrf
-                                            <input type="hidden" name="posting_id" value="{{ $posting->id }}">
-                                            <button type="submit" class="btn btn-sm btn-secondary">Bookmark</button>
-                                        </form>
-                                    </div>
-                                </div>
-                            @endforeach
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <div class="tab">
+            <button class="tablinks" onclick="changePage(event, 'Following')">POST</button>
+            <button class="tablinks" onclick="changePage(event, 'FYP')">+</button>
         </div>
 
+        <div id="Following" class="tabcontent">
+            <div class="content">
+                <div class="posts">
+                    @foreach ($postings as $posting)
+                        <div class="card">
+                            <figure class="px-10 pt-10">
+                                @if ($posting->photo)
+                                    <img src="{{ asset('storage/' . $posting->photo) }}" height="100px" alt="Photo" class="rounded-xl w-1/2" />
+                                @else
+                                    <span>No photo</span>
+                                @endif
+                            </figure>
+                            <div class="card-body">
+                                <h2>{{ $posting->user->name }}</h2>
+                                <p>{{ $posting->content }}</p>
+                            </div>
+                            <div class="card-actions">
+                                <a href="{{ route('posts.edit', $posting->id) }}" class="btn btn-warning">Edit</a>
+                                <form action="{{ route('posts.destroy', $posting->id) }}" method="post" style="display:inline;">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="submit" class="btn btn-error" value="Delete">
+                                </form>
+                            </div>
+                            <div class="card-actions">
+                                @if(auth()->check())
+                                    @if(auth()->user()->liked($posting))
+                                        <form action="{{ route('posts.unlike', $posting->id) }}" method="POST">
+                                            @csrf
+                                            <button type="submit" class="fw-light nav-link fs-6">
+                                                <span class="btn btn-sm btn-secondary">&#128420</span> {{ $posting->likes()->count() }}
+                                            </button>
+                                        </form>
+                                    @else
+                                        <form action="{{ route('posts.like', $posting->id) }}" method="POST">
+                                            @csrf
+                                            <button type="submit" class="fw-light nav-link fs-6">
+                                                <span class="btn btn-sm btn-secondary">&#129293</span> {{ $posting->likes()->count() }}
+                                            </button>
+                                        </form>
+                                    @endif
+                                @endif
+                                <a href="{{ route('postings.show', $posting) }}" class="btn btn-secondary">Komentar</a>
+                                <form action="{{ route('bookmarks.store') }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    <input type="hidden" name="posting_id" value="{{ $posting->id }}">
+                                    <button type="submit" class="btn btn-secondary">Bookmark</button>
+                                </form>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+
+            </div>
+        </div>
 
         <div id="FYP" class="tabcontent">
             <h3>Post</h3>
 
-            <form action="/posts" method="post" class="post-form">
+            <form action="{{ route('posts.store') }}" method="post" class="post-form" enctype="multipart/form-data">
                 @csrf
                 <textarea class="@error('content') is-invalid @enderror" name="content" rows="3" placeholder="Apa yang kamu pikirkan?"></textarea>
                 @error('content')
-                <span class="text-error">{{ $message }}</span>
+                    <span class="text-error">{{ $message }}</span>
+                @enderror
+                <input type="file" name="photo" class="file-input file-input-bordered file-input-info bg-yellow-100 w-full max-w-xs">
+                @error('photo')
+                    <span class="text-error">{{ $message }}</span>
                 @enderror
                 <input type="submit" value="Post">
             </form>
+
         </div>
 
         <!-- Settings Dropdown -->
