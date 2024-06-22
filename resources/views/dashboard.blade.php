@@ -26,7 +26,7 @@
 
                     <!-- form -->
                    <form action="/posts" class="form-control"
-                   method="post">
+                   method="post" enctype="multipart/form-data">
                         @csrf
                         <textarea
                             class="@error('content')
