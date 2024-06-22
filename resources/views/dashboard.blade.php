@@ -356,17 +356,17 @@
                             <div class="card-actions">
                                 @if(auth()->check())
                                     @if(auth()->user()->liked($posting))
-                                        <form action="{{ route('posts.unlike', $posting->id) }}" method="POST">
+                                        <form action="{{ route('posts.unlike', $posting->id) }}" method="POST" class="d-inline">
                                             @csrf
-                                            <button type="submit" class="fw-light nav-link fs-6">
-                                                <span class="btn btn-sm btn-secondary">&#128420</span> {{ $posting->likes()->count() }}
+                                            <button type="submit" class="btn btn-sm btn-outline-danger d-flex align-items-center">
+                                                <i class="fas fa-heart me-1"></i> {{ $posting->likes()->count() }}
                                             </button>
                                         </form>
                                     @else
-                                        <form action="{{ route('posts.like', $posting->id) }}" method="POST">
+                                        <form action="{{ route('posts.like', $posting->id) }}" method="POST" class="d-inline">
                                             @csrf
-                                            <button type="submit" class="fw-light nav-link fs-6">
-                                                <span class="btn btn-sm btn-secondary">&#129293</span> {{ $posting->likes()->count() }}
+                                            <button type="submit" class="btn btn-sm btn-outline-secondary d-flex align-items-center">
+                                                <i class="far fa-heart me-1"></i> {{ $posting->likes()->count() }}
                                             </button>
                                         </form>
                                     @endif

@@ -356,18 +356,18 @@
                             <div class="card-actions">
                                 <?php if(auth()->check()): ?>
                                     <?php if(auth()->user()->liked($posting)): ?>
-                                        <form action="<?php echo e(route('posts.unlike', $posting->id)); ?>" method="POST">
+                                        <form action="<?php echo e(route('posts.unlike', $posting->id)); ?>" method="POST" class="d-inline">
                                             <?php echo csrf_field(); ?>
-                                            <button type="submit" class="fw-light nav-link fs-6">
-                                                <span class="btn btn-sm btn-secondary">&#128420</span> <?php echo e($posting->likes()->count()); ?>
+                                            <button type="submit" class="btn btn-sm btn-outline-danger d-flex align-items-center">
+                                                <i class="fas fa-heart me-1"></i> <?php echo e($posting->likes()->count()); ?>
 
                                             </button>
                                         </form>
                                     <?php else: ?>
-                                        <form action="<?php echo e(route('posts.like', $posting->id)); ?>" method="POST">
+                                        <form action="<?php echo e(route('posts.like', $posting->id)); ?>" method="POST" class="d-inline">
                                             <?php echo csrf_field(); ?>
-                                            <button type="submit" class="fw-light nav-link fs-6">
-                                                <span class="btn btn-sm btn-secondary">&#129293</span> <?php echo e($posting->likes()->count()); ?>
+                                            <button type="submit" class="btn btn-sm btn-outline-secondary d-flex align-items-center">
+                                                <i class="far fa-heart me-1"></i> <?php echo e($posting->likes()->count()); ?>
 
                                             </button>
                                         </form>

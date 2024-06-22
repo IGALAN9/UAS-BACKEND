@@ -22,7 +22,6 @@
             font-weight: bold;
         }
 
-        /**all update information */
         .py-12 {
             padding-top: 3rem;
             padding-bottom: 3rem;
