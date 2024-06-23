@@ -299,6 +299,29 @@
             border: none;
             cursor: pointer;
         }
+
+        /** DM Button */
+        .DM {
+            position: absolute;
+            top: 39px;
+            right: 186px;
+            display: inline-block;
+        }
+        .DM a {
+            display: inline-flex;
+            align-items: center;
+            background: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            font-size: 16px;
+            border-radius: 25px;
+            text-decoration: none;
+        }
+        .DM i {
+            font-size: 18px;
+            margin-right: 10px;
+        }
+
     </style>
 </head>
 <body>
@@ -412,8 +435,8 @@
             </div>
         </div>
 
-        <div style="position: fixed; bottom: 70px; right: 20px;">
-            <a href="{{ route('messages.show') }}" class="btn btn-primary">Direct Messages</a>
+        <div class="DM">
+            <a href="{{ route('messages.show') }}" <i class="fas fa-envelope"></i></a>
         </div>
 
     <script>
@@ -441,31 +464,35 @@
         $(document).ready(function() {
             $('#search').on('keyup', function() {
                 var query = $(this).val();
-                $.ajax({
-                    url: "{{ route('search.results') }}",
-                    type: "GET",
-                    data: { 'query': query },
-                    success: function(data) {
-                        console.log(data); 
-                        $('#result').empty();
-                        if (data.length > 0) {
-                            $.each(data, function(key, user) {
-                                var userUrl = '{{ url("/profile") }}/' + user.username;
-                                $('#result').append('<li><a href="' + userUrl + '">' + user.username + '</a></li>');
-                            });
-                        } 
-                        else {
-                            $('#result').append('<li>No results found</li>');
-                        }
-                    },
-                    error: function(xhr, status, error) {
-                        console.error(xhr.responseText); 
-                        $('#result').empty();
-                        $('#result').append('<li>' + xhr.responseJSON.message + '</li>');
-                    }
-                });
+                performSearch(query);
             });
         });
+
+        function performSearch(query) {
+            $.ajax({
+                url: "{{ route('search.results') }}",
+                type: "GET",
+                data: { 'query': query },
+                success: function(data) {
+                    console.log(data); 
+                    $('#result').empty();
+                    if (data.length > 0) {
+                        $.each(data, function(key, user) {
+                            var userUrl = '{{ url("/profile") }}/' + user.username;
+                            $('#result').append('<li><a href="' + userUrl + '">' + user.username + '</a></li>');
+                        });
+                    } 
+                    else {
+                        $('#result').append('<li>No results found</li>');
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error(xhr.responseText); 
+                    $('#result').empty();
+                    $('#result').append('<li>' + xhr.responseJSON.message + '</li>');
+                }
+            });
+        }
     </script>
 </body>
 </html>
