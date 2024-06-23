@@ -66,6 +66,9 @@ unset($__errorArgs, $__bag); ?>
             </div>
         </div>
     </div>
+    <div style="position: fixed; bottom: 70px; right: 20px;">
+        <a href="<?php echo e(route('messages.show')); ?>" class="btn btn-primary">Direct Messages</a>
+    </div>
     <div style="position: fixed; bottom: 20px; right: 20px;">
         <a href="<?php echo e(route('bookmarks.index')); ?>" class="btn btn-primary">Lihat Bookmark Anda</a>
     </div>

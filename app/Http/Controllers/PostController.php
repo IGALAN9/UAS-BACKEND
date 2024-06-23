@@ -15,13 +15,6 @@ class PostController extends Controller
                 'postings' => Posting::latest()->get(),
                 ]);
         }
-
-    public function show($posting)
-    {
-        return view('postings.show',[
-            'posting' => Posting::find($posting),
-        ]);
-    }
     
     public function store(Request $request)
 {
@@ -81,5 +74,11 @@ class PostController extends Controller
             session()->flash('success','Berhasil menghapus Post');
         }
         return to_route('dashboard');
+    }
+
+    public function show(Posting $posting){
+        $posting -> load('comments.user');
+
+        return view('postings.show', compact('posting'));
     }
 }

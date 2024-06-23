@@ -5,9 +5,11 @@ use App\Http\Controllers\PostController;
 use App\Http\Controllers\Post_LikeController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\BookmarkController;
+use App\Http\Controllers\MessageController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\UserProfileController;
+use App\Http\Controllers\FollowerController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -47,6 +49,7 @@ Route::post('postings/{posting}/comments', [CommentController::class, 'store'])
 Route::post('posting/{posting}/like',[Post_LikeController::class,'like'])
 ->middleware(['auth', 'verified'])
 ->name('posts.like');
+
 Route::post('posting/{posting}/unlike',[Post_LikeController::class,'unlike'])
 ->middleware(['auth', 'verified'])
 ->name('posts.unlike');
@@ -80,5 +83,29 @@ Route::get('/search', [SearchController::class, 'showSearchPage'])
 Route::get('/search/results', [SearchController::class, 'search'])
     ->middleware(['auth', 'verified'])
     ->name('search.results');
+
+Route::middleware(['auth'])->group(function() {
+    Route::get('/messages', [MessageController::class, 'show'])->name('messages.show');
+    Route::get('/messages/search', [MessageController::class, 'search'])->name('messages.search');
+    Route::get('/messages/chat/{userId}', [MessageController::class, 'chat'])->name('messages.chat');
+    Route::post('/messages', [MessageController::class, 'store'])->name('messages.store');
+    Route::delete('/messages/{message}', [MessageController::class, 'destroy'])->name('messages.destroy');
+});
+
+Route::post('users/{user}/follow', [FollowerController::class, 'follow'])
+    ->middleware(['auth', 'verified'])
+    ->name('users.follow');
+
+Route::post('users/{user}/unfollow', [FollowerController::class, 'unfollow'])
+    ->middleware(['auth', 'verified'])
+    ->name('users.unfollow');
+
+Route::get('/posting/{posting}', [PostController::class, 'show'])
+    ->middleware(['auth', 'verified'])
+    ->name('posting.show');
+
+Route::get('/followsugest', [FollowerController::class, 'show'])
+    ->middleware(['auth', 'verified'])
+    ->name('follow.show');
 
 require __DIR__.'/auth.php';

@@ -15,10 +15,6 @@ class SearchController extends Controller
         $query = $request -> input('query');
         $users = User::where('username', 'LIKE', "%$query%")->get();
 
-        if($users -> isEmpty()){
-            return response()->json(['message'=> 'Username not found.'], 404);
-        }
-
         return response()->json($users);
     }
 }

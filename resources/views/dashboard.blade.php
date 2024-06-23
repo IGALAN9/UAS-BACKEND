@@ -411,7 +411,11 @@
                 </form>
             </div>
         </div>
-    </div>
+
+        <div style="position: fixed; bottom: 70px; right: 20px;">
+            <a href="{{ route('messages.show') }}" class="btn btn-primary">Direct Messages</a>
+        </div>
+
     <script>
         function openNav() {
             document.getElementById("mySidenav").style.width = "250px";
