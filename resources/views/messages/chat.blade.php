@@ -106,6 +106,10 @@
             background-color: #f0f4f8;
         }
 
+        .dropdown-menu.show {
+            display: block;
+        }
+
         .nav-link {
             display: flex;
             justify-content: flex-start;
@@ -156,16 +160,18 @@
                                         @endif
                                     </strong>
                                     @if ($message->sender_id == Auth::id())
-                                        <button onclick="toggleDropdown({{ $message->id }})">
+                                    <div class="relative">
+                                        <button class="text-gray-500 hover:text-gray-700 focus:outline-none focus:text-gray-700" onclick="toggleDropdown({{ $message->id }})">
                                             &#x2022;&#x2022;&#x2022;
                                         </button>
                                         <div id="dropdown-{{ $message->id }}" class="dropdown-menu">
                                             <form action="{{ route('messages.destroy', $message->id) }}" method="POST" onsubmit="return confirm('Hapus pesan ini?')">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit">Hapus</button>
+                                                <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100">Hapus</button>
                                             </form>
                                         </div>
+                                    </div>
                                     @endif
                                 </div>
                                 <div>{{ $message->message }}</div>
@@ -194,7 +200,7 @@
     <script>
         function toggleDropdown(messageId) {
             const dropdown = document.getElementById('dropdown-' + messageId);
-            dropdown.classList.toggle('hidden');
+            dropdown.classList.toggle('show');
         }
     </script>
 </body>
