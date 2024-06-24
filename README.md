@@ -58,7 +58,7 @@ npm install
    php artisan migrate
    ```
 
-5.**Sambungkan ke public**
+5.**Sambungkan storage**
 ```
 php artisan storage:link
 ```
