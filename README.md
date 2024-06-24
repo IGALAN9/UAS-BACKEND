@@ -47,7 +47,7 @@ https://github.com/IGALAN9/UAS-BACKEND.git
 
 2.**install dependencies**
 ```
-npm run dev
+npm install
 ```
 
 3.**atur variable**: Ubah Env sesuai kebutuan
@@ -65,6 +65,7 @@ php artisan storage:link
 
 6.**Memulai aplikasi**
 ```
+npm run dev
 php artisan serve
 ```
 
