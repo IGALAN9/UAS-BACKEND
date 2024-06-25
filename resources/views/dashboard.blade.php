@@ -37,8 +37,9 @@
                         @error('content')
                             <span class="text-error">{{ $message }}</span>
                         @enderror
-                        <input type="file" name="photo" class="file-input file-input-bordered file-input-info bg-yellow-100 w-full max-w-xs" />
-                            <input type="submit" value="Post" class="btn btn-secondary">
+                        <!-- <input type="file" name="photo" class="file-input file-input-bordered file-input-info bg-yellow-100 w-full max-w-xs" /> -->
+                        <input type="file" name="media" class="file-input file-input-bordered file-input-info bg-yellow-100 w-full max-w-xs" />
+                        <input type="submit" value="Post" class="btn btn-secondary">
                    </form>
 
                    <div class="flex flex-col space-y-4 mt-4">
@@ -46,8 +47,13 @@
                         <figure class="px-10 pt-10">
                             @if ($posting->photo)
                                 <img src="{{ asset('storage/' . $posting->photo) }}" height="100px" alt="Photo" class="rounded-xl w-1/2" />
+                            @elseif ($posting->video)
+                            <video controls height="200">
+                                <source src="{{ asset('storage/' . $posting->video) }}" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
                             @else
-                                <span>No photo</span>
+                                <span>No photo or video</span>
                             @endif
                         </figure>
                         <div class="card-bordered bg-yellow-100">
@@ -66,7 +72,6 @@
                             <div class="card-actions p-2">
                             </div>
                             @auth()
-                                
                             
                             @if(Auth::user()->liked($posting))
                                 <form action="{{route('posts.unlike', $posting->id)}}" method="POST">
