@@ -134,9 +134,14 @@
             <div class="card">
                 <figure class="px-10 pt-10">
                     @if ($bookmark->posting->photo)
-                        <img src="{{ asset('storage/' . $bookmark->posting->photo) }}" alt="Photo" class="w-1/2" />
+                        <img src="{{ asset('storage/' . $bookmark->posting->photo) }}" height="100px" alt="Photo" class="rounded-xl w-1/2" />
+                    @elseif ($bookmark->posting->video)
+                    <video controls height="200">
+                        <source src="{{ asset('storage/' . $bookmark->posting->video) }}" type="video/mp4">
+                        Your browser does not support the video tag.
+                    </video>
                     @else
-                        <span>No photo</span>
+                        <span>No photo or video</span>
                     @endif
                 </figure>
                 <div class="card-body">
