@@ -304,7 +304,7 @@
         .DM {
             position: absolute;
             top: 39px;
-            right: 186px;
+            right: 250px;
             display: inline-block;
         }
         .DM a {
@@ -329,6 +329,7 @@
     <div id="mySidenav" class="sidenav">
         <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
         <a href="<?php echo e(route('bookmarks.index')); ?>" class="btn btn-primary">Bookmark Anda</a>
+        <a href="<?php echo e(route('follow.show')); ?>" class="text-blue-600 hover:underline">Follow Suggestion</a>
     </div>
     <!-- Main page -->
     <div class="mainPage">
@@ -357,8 +358,13 @@
                             <figure class="px-10 pt-10">
                                 <?php if($posting->photo): ?>
                                     <img src="<?php echo e(asset('storage/' . $posting->photo)); ?>" height="100px" alt="Photo" class="rounded-xl w-1/2" />
+                                <?php elseif($posting->video): ?>
+                                <video controls height="200">
+                                    <source src="<?php echo e(asset('storage/' . $posting->video)); ?>" type="video/mp4">
+                                    Your browser does not support the video tag.
+                                </video>
                                 <?php else: ?>
-                                    <span>No photo</span>
+                                    <span>No photo or video</span>
                                 <?php endif; ?>
                             </figure>
                             <div class="card-body">
@@ -427,8 +433,8 @@ $message = $__bag->first($__errorArgs[0]); ?>
 if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
-                <input type="file" name="photo" class="file-input file-input-bordered file-input-info bg-yellow-100 w-full max-w-xs">
-                <?php $__errorArgs = ['photo'];
+                <input type="file" name="media" class="file-input file-input-bordered file-input-info bg-yellow-100 w-full max-w-xs">
+                <?php $__errorArgs = ['media'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
 if (isset($message)) { $__messageOriginal = $message; }

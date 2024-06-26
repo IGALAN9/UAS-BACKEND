@@ -20,18 +20,39 @@ class PostController extends Controller
 {
     $this->validate($request, [
         'content' => ['required'],
-        'photo' => ['image'],
+        // 'photo' => ['image'],
+        'media'=> ['nullable', 'file', 'mimes:jpeg,png,mp4,mov,ogg,qt']
     ]);
 
     $photo = null;
+    $video = null;
 
-    if ($request->hasFile('photo')) {
-        $photo = $request->file('photo')->store('photos', 'public');
+    // if ($request->hasFile('photo')) {
+    //     $photo = $request->file('photo')->store('photos', 'public');
+    // }
+
+    // if ($request->hasFile('video')) {
+    //     $video = $request->file('video')->store('videos', 'public');
+    // }
+
+    if ($request->hasFile('media')) {
+        $file = $request->file('media');
+        $mime = $file->getMimeType();
+
+        if(strpos($mime,'image')!==false){
+            $photo = $file->store('photos','public');
+        }
+        elseif(strpos($mime,'video')!==false){
+            $video = $file->store('videos','public');
+        }
     }
+
+
     Posting::create([
         'user_id' => auth()->id(),
         'content' => $request->content,
         'photo' => $photo,
+        'video' => $video,
     ]);
 
     session()->flash('success', 'Berhasil Post');
@@ -66,13 +87,19 @@ class PostController extends Controller
     public function destroy($id){
         $posting = Posting::find($id);
 
-        if ($posting){
+            if (!$posting){
+                session()->flash('success','Postingan tidak di temukan');
+                return redirect()->route('dashboard');
+            }
+
+            if($posting->user_id !== auth()->id()){
+                session()->flash('success','Tidak diijinkan menghapus posting');
+                return redirect()->route('dashboard');
+            }
+
             $posting->comments()->delete();
             $posting->delete();
             session()->flash('success','Berhasil menghapus Post');
-        } else{
-            session()->flash('success','Berhasil menghapus Post');
-        }
         return to_route('dashboard');
     }
 

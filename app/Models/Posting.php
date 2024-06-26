@@ -10,7 +10,7 @@ class Posting extends Model
     use HasFactory;
 
     protected $fillable = [
-        'user_id', 'content', 'photo',
+        'user_id', 'content', 'photo','video',
     ];
     
     public function user()

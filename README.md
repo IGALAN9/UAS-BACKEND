@@ -22,7 +22,7 @@
 
 ✔️ Bookmark -> (Eriys)
 
-❌ Profile -> (Joanne)
+✔️ Profile -> (Joanne)
 
 ✔️ Post foto -> (Adriano)
 
@@ -30,12 +30,44 @@
 
 ------------(Optinal things)-------------- 
 
-❌ Follow -> (Joanne)
+✔️ Follow -> (Joanne)
 
 ❌ Following tab -> (kheinichi)
 
-❌ Livechat -> (eriys and joanne)
+✔️ Livechat -> (eriys and joanne)
 
+## Penggunaan
+
+Untuk memulai Media sosial ini dapat dimulai dengan: 
+
+1.**clone repository**
+```
+https://github.com/IGALAN9/UAS-BACKEND.git
+```
+
+2.**install dependencies**
+```
+npm install
+```
+
+3.**atur variable**: Ubah Env sesuai kebutuan
+
+4.**Migrasi database**
+   ```
+   php artisan migrate:fresh
+   php artisan migrate
+   ```
+
+5.**Sambungkan storage**
+```
+php artisan storage:link
+```
+
+6.**Memulai aplikasi**
+```
+npm run dev
+php artisan serve
+```
 
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
