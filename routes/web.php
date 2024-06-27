@@ -108,4 +108,12 @@ Route::get('/followsugest', [FollowerController::class, 'show'])
     ->middleware(['auth', 'verified'])
     ->name('follow.show');
 
+Route::get('/users/{user}/following', [FollowerController::class, 'following'])
+    ->middleware(['auth', 'verified'])
+    ->name('users.following');
+
+Route::get('/users/{user}/followers', [FollowerController::class, 'followers'])
+    ->middleware(['auth', 'verified'])
+    ->name('users.followers');
+
 require __DIR__.'/auth.php';
